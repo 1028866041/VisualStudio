@@ -1,5 +1,13 @@
 # Default ignored files
 *.opensdf
+*.idb
+*.pdb
+*.ipch
+*.sdf
+*.suo
+*.ilk
+*.vcxproj
+*.vcxproj.filters
 *.obj
 *.log
 *.tlog

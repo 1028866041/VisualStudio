@@ -6,6 +6,7 @@
 /* #pragma comment(lib,"winmm.lib")
 #pragma comment( linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"" )*/
 
+#define WM_MSG WM_USER+1
 LRESULT WINAPI MyWindProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE  hPrevInstance, LPSTR lpCmdline, int nShowCmd)
@@ -22,9 +23,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE  hPrevInstance, LPSTR lpCmdlin
 	wnd.lpszMenuName= NULL;
 	wnd.lpszClassName= L"main";
 	RegisterClass(&wnd);	
-	HWND hWnd= CreateWindow(L"main",L"windows", WS_OVERLAPPED,100,100,300,300,NULL,NULL,hInstance,NULL);
+	HWND hWnd= CreateWindow(L"main",L"windows", WS_OVERLAPPED,100,100,300,300,NULL,NULL, hInstance,NULL);
+	HWND hWnd2= CreateWindow(L"main",L"windows2", WS_OVERLAPPED,100,400,300,300,NULL,NULL, hInstance,NULL);
+
 	ShowWindow(hWnd, nShowCmd);
 	UpdateWindow(hWnd);
+	ShowWindow(hWnd2, nShowCmd);
+	UpdateWindow(hWnd2);
 
 	printf("%d %d %\n", hInstance, hPrevInstance, GetModuleHandle(NULL));
 	printf("%s\t %d %d\n",GetCommandLineA(), nShowCmd, SW_SHOWDEFAULT);
@@ -38,6 +43,20 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE  hPrevInstance, LPSTR lpCmdlin
 	MSG msg;
 	while(GetMessage(&msg, NULL,0,0))
 	{
+		if(msg.message== WM_MOUSEMOVE)
+		{
+			char a[64];
+			sprintf(a, "%p", msg. hwnd);
+			MessageBoxA(NULL, a, "message", 0);
+			/*SendMessage(hWnd2, WM_MSG, 0 ,0);*/
+			//PostMessage(hWnd2, WM_MSG, 0, 0);
+			//PostThreadMessage(GetCurrentThreadId(),WM_MSG,0,0);
+			PostQuitMessage(0);
+		}
+		if(msg.message== WM_MSG)
+		{
+			MessageBoxA(NULL, "message wm_msg", "",MB_OK);
+		}
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 	}
@@ -49,6 +68,10 @@ LRESULT WINAPI MyWindProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 	{
 		case WM_DESTROY:
 			PostQuitMessage(0);
+			break;
+		case WM_MSG:
+			MessageBoxA(NULL, "message wm_msg proc", "", MB_OK);
+			break;
 		default:
 			return DefWindowProc(hwnd, message, wParam, lParam);
 		return 0;
