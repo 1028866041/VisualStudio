@@ -3,7 +3,7 @@
 #include<locale.h>
 
 #pragma comment( linker, "/subsystem:\"console\" /entry:\"WinMainCRTStartup\"" )
-/* #pragma comment(lib,"winmm.lib")
+/*#pragma comment(lib,"winmm.lib")
 #pragma comment( linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"" )*/
 
 #define WM_MSG WM_USER+1
@@ -49,9 +49,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE  hPrevInstance, LPSTR lpCmdlin
 			sprintf(a, "%p", msg. hwnd);
 			MessageBoxA(NULL, a, "message", 0);
 			/*SendMessage(hWnd2, WM_MSG, 0 ,0);*/
-			//PostMessage(hWnd2, WM_MSG, 0, 0);
-			//PostThreadMessage(GetCurrentThreadId(),WM_MSG,0,0);
-			PostQuitMessage(0);
+			PostMessage(hWnd2, WM_MSG, 0, 0);
+			/*PostThreadMessage(GetCurrentThreadId(),WM_MSG,0,0);
+			PostQuitMessage(0);*/
 		}
 		if(msg.message== WM_MSG)
 		{
