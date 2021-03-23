@@ -3,7 +3,6 @@
 *.idb
 *.pdb
 *.ipch
-*.sdf
 *.suo
 *.ilk
 *.vcxproj
