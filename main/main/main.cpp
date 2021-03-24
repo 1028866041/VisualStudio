@@ -43,7 +43,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE  hPrevInstance, LPSTR lpCmdlin
 	MSG msg;
 	while(GetMessage(&msg, NULL,0,0))
 	{
-		if(msg.message== WM_MOUSEMOVE)
+		if(msg.message== WM_MOUSEWHEEL)
 		{
 			char a[64];
 			sprintf(a, "%p", msg. hwnd);
@@ -55,7 +55,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE  hPrevInstance, LPSTR lpCmdlin
 		}
 		if(msg.message== WM_MSG)
 		{
-			MessageBoxA(NULL, "message wm_msg", "",MB_OK);
+			MessageBoxA(NULL, "wm_msg", "",MB_OK);
 		}
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
@@ -70,7 +70,7 @@ LRESULT WINAPI MyWindProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 			PostQuitMessage(0);
 			break;
 		case WM_MSG:
-			MessageBoxA(NULL, "message wm_msg proc", "", MB_OK);
+			MessageBoxA(NULL, "wm_msg proc", "", MB_OK);
 			break;
 		default:
 			return DefWindowProc(hwnd, message, wParam, lParam);
