@@ -59,7 +59,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE  hPrevInstance, LPSTR lpCmdlin
 		}
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
-	}
+	}	
 }
 
 LRESULT WINAPI MyWindProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -75,5 +75,5 @@ LRESULT WINAPI MyWindProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 		default:
 			return DefWindowProc(hwnd, message, wParam, lParam);
 		return 0;
-	}
+ 	}
 }
